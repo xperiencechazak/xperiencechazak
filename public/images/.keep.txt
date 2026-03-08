@@ -1,0 +1,1 @@
+# This file is here to make the folder visible in the UI. You can delete it after uploading your images.
