@@ -668,62 +668,70 @@ const WhoWeServe = () => {
 
 const Portfolio = () => {
   const items = [
-    { title: "The Action", desc: "Teams navigating sports-based strategy drills.", img: "/images/PortfolioAction.jpg" },
-    { title: "The Huddle", desc: "Denis Nzioka leading a 'Sideline Session' with an open Bible.", img: "/images/PortfolioHuddle.jpg" },
-    { title: "The Breakthrough", desc: "Leaders embracing after a difficult challenge.", img: "/images/PortfolioBreakthrough.jpg" },
-    { title: "Church Retreat", desc: "Pastoral Staff Alignment Retreat.", img: "/images/PortfolioChurch.jpg" },
-    { title: "Corporate Lab", desc: "Executive Leadership 'Pressure Lab'.", img: "/images/PortfolioCorporate.jpg" },
-    { title: "Institutional Workshop", desc: "Faculty Culture & Unity Workshop.", img: "/images/PortfolioInstitutional.jpg" },
+    { img: "/images/PortfolioAction.jpg" },
+    { img: "/images/PortfolioHuddle.jpg" },
+    { img: "/images/PortfolioBreakthrough.jpg" },
+    { img: "/images/PortfolioChurch.jpg" },
+    { img: "/images/PortfolioCorporate.jpg" },
+    { img: "/images/PortfolioInstitutional.jpg" },
+    { img: "/images/PortfolioDebrief.jpg" },
+    { img: "/images/PortfolioYouth.jpg" },
+    { img: "/images/PortfolioTeens.jpg" },
+    { img: "/images/PortfolioMinistry.jpg" },
+    { img: "/images/PortfolioStrategy.jpg" },
+    { img: "/images/PortfolioVision.jpg" },
   ];
 
   return (
     <section id="portfolio" className="py-24 bg-earth text-white overflow-hidden">
-      <motion.div 
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8 }}
-        className="max-w-7xl mx-auto px-6"
-      >
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
-          <div>
-            <span className="text-amber font-bold tracking-widest uppercase text-sm mb-4 block">Evidence of Impact</span>
-            <h2 className="text-4xl md:text-5xl font-black font-serif italic">Visual Portfolio</h2>
-          </div>
-          <p className="text-sand max-w-md">A glimpse into the transformative experiences we facilitate across Kenya and beyond.</p>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="max-w-7xl mx-auto px-6">
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={{
+            visible: {
+              transition: {
+                staggerChildren: 0.1
+              }
+            }
+          }}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
+        >
           {items.map((item, i) => (
             <motion.div 
               key={i}
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ delay: i * 0.05 }}
-              viewport={{ once: true }}
-              className="relative aspect-square rounded-2xl overflow-hidden group cursor-pointer"
+              variants={{
+                hidden: { opacity: 0, y: 20, scale: 0.95 },
+                visible: { opacity: 1, y: 0, scale: 1 }
+              }}
+              whileHover={{ 
+                scale: 1.02,
+                transition: { duration: 0.3 }
+              }}
+              className="relative aspect-[4/5] rounded-2xl overflow-hidden group cursor-pointer bg-white/5"
             >
-              <img 
+              <motion.img 
                 src={item.img} 
-                alt={item.title} 
-                className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-110"
+                alt={`Gallery image ${i + 1}`} 
+                className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+                whileHover={{ scale: 1.1 }}
                 referrerPolicy="no-referrer"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-earth via-transparent to-transparent opacity-60 group-hover:opacity-90 transition-opacity" />
-              <div className="absolute bottom-0 left-0 p-8 translate-y-4 group-hover:translate-y-0 transition-transform">
-                <h4 className="text-xl font-bold text-amber mb-2">{item.title}</h4>
-                <p className="text-sm text-sand opacity-0 group-hover:opacity-100 transition-opacity">{item.desc}</p>
-              </div>
+              <div className="absolute inset-0 bg-earth/40 group-hover:bg-transparent transition-colors duration-500" />
+              
+              {/* Subtle border reveal on hover */}
+              <div className="absolute inset-0 border-2 border-amber/0 group-hover:border-amber/30 transition-all duration-500 rounded-2xl pointer-events-none" />
             </motion.div>
           ))}
-        </div>
-      </motion.div>
+        </motion.div>
+      </div>
     </section>
   );
 };
 
 const Packages = () => {
-  const packages = [
+  const mainPackages = [
     {
       name: "Nguzo Package",
       price: "15,000",
@@ -745,27 +753,27 @@ const Packages = () => {
       desc: "Total organizational transformation through deep immersion and vision building.",
       features: ["Camp style of team building details", "Group excursions & hikes", "Leadership Under Pressure labs", "Vision & Unity building", "Dance and Hype sessions", "Customized curriculum"],
       cta: "Request Booking"
-    },
+    }
+  ];
+
+  const addOns = [
     {
       name: "Christian DJ Add-on",
       price: "15,000",
       desc: "Elevate your experience with professional Christian entertainment.",
-      features: ["Professional Sound System", "Curated Christian Playlist", "Live DJ Performance", "Available for any package"],
-      cta: "Add to Package"
+      icon: <Music className="w-6 h-6" />
     },
     {
       name: "Photography Package",
       price: "10,000",
       desc: "Capture every breakthrough moment with professional event photography.",
-      features: ["High-resolution digital photos", "Quick turnaround time", "Available for any package"],
-      cta: "Add to Package"
+      icon: <Camera className="w-6 h-6" />
     },
     {
       name: "Board Games Package",
       price: "5,000",
       desc: "Engage your team with curated board games designed for strategy and connection.",
-      features: ["Curated strategy games", "Facilitated game sessions", "Available for any package"],
-      cta: "Add to Package"
+      icon: <Gamepad2 className="w-6 h-6" />
     }
   ];
 
@@ -777,8 +785,8 @@ const Packages = () => {
           <p className="text-earth/60 text-lg">Invest in the eternal value of your team's leadership and unity.</p>
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-8 items-stretch">
-          {packages.map((pkg, i) => (
+        <div className="grid lg:grid-cols-3 gap-8 items-stretch mb-20">
+          {mainPackages.map((pkg, i) => (
             <motion.div 
               key={i}
               initial={{ opacity: 0, y: 30 }}
@@ -819,6 +827,35 @@ const Packages = () => {
               </Link>
             </motion.div>
           ))}
+        </div>
+
+        <div className="pt-12 border-t border-sand">
+          <div className="text-center mb-12">
+            <h3 className="text-3xl font-black text-earth mb-2">Enhance Your Xperience</h3>
+            <p className="text-earth/60">Optional add-ons available for any package</p>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-6">
+            {addOns.map((addon, i) => (
+              <motion.div 
+                key={i}
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ delay: i * 0.1 }}
+                viewport={{ once: true }}
+                className="bg-white p-6 rounded-3xl border border-sand shadow-sm flex items-center gap-6"
+              >
+                <div className="w-12 h-12 bg-amber/10 rounded-2xl flex items-center justify-center text-amber">
+                  {addon.icon}
+                </div>
+                <div>
+                  <h4 className="font-bold text-earth">{addon.name}</h4>
+                  <div className="text-sm text-earth/60 mb-1">{addon.desc}</div>
+                  <div className="text-terracotta font-black">KSh {addon.price}</div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -1058,9 +1095,6 @@ const Booking = () => {
     'Nguzo Package': 15000,
     'Ngome Package': 25000,
     'Boma Package': 40000,
-    'Christian DJ Add-on': 15000,
-    'Photography Package': 10000,
-    'Board Games Package': 5000,
   };
 
   const djAddonPrice = 15000;
@@ -1322,9 +1356,6 @@ const Booking = () => {
                       <option value="Nguzo Package">Nguzo Package (KSh 15k)</option>
                       <option value="Ngome Package">Ngome Package (KSh 25k)</option>
                       <option value="Boma Package">Boma Package (KSh 40k)</option>
-                      <option value="Christian DJ Add-on">Christian DJ Add-on (KSh 15k)</option>
-                      <option value="Photography Package">Photography Package (KSh 10k)</option>
-                      <option value="Board Games Package">Board Games Package (KSh 5k)</option>
                     </select>
                   </div>
                 </div>
