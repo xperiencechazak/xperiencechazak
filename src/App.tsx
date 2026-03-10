@@ -674,7 +674,6 @@ const Portfolio = () => {
     { img: "/images/PortfolioChurch.jpg" },
     { img: "/images/PortfolioCorporate.jpg" },
     { img: "/images/PortfolioInstitutional.jpg" },
-    { img: "/images/PortfolioDebrief.jpg" },
     { img: "/images/PortfolioYouth.jpg" },
     { img: "/images/PortfolioTeens.jpg" },
     { img: "/images/PortfolioMinistry.jpg" },
